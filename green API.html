@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Green API</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Функция для вызова метода getsettings
+            function getSettings() {
+                $.ajax({
+                    url: "https://green-api.com/api/green/getsettings",
+                    type: "GET",
+                    dataType: "json",
+                    success: function(response) {
+                        // Вывод ответа в поле для чтения
+                        $("#response").val(JSON.stringify(response));
+                    },
+                    error: function(error) {
+                        // Обработка ошибки
+                        console.log(error);
+                    }
+                });
+            }
+
+            // Функция для вызова метода getstateinstance
+            function getStateInstance() {
+                $.ajax({
+                    url: "https://green-api.com/api/green/getstateinstance",
+                    type: "GET",
+                    dataType: "json",
+                    success: function(response) {
+                        // Вывод ответа в поле для чтения
+                        $("#response").val(JSON.stringify(response));
+                    },
+                    error: function(error) {
+                        // Обработка ошибки
+                        console.log(error);
+                    }
+                });
+            }
+
+            // Функция для вызова метода sendmessage
+            function sendMessage() {
+                $.ajax({
+                    url: "https://green-api.com/api/green/sendmessage",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        message: "Текст сообщения"
+                    },
+                    success: function(response) {
+                        // Вывод ответа в поле для чтения
+                        $("#response").val(JSON.stringify(response));
+                    },
+                    error: function(error) {
+                        // Обработка ошибки
+                        console.log(error);
+                    }
+                });
+            }
+
+            // Функция для вызова метода sendfilebyurl
+            function sendFileByUrl() {
+                $.ajax({
+                    url: "https://green-api.com/api/green/sendfilebyurl",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        fileUrl: "https://example.com/file.jpg"
+                    },
+                    success: function(response) {
+                        // Вывод ответа в поле для чтения
+                        $("#response").val(JSON.stringify(response));
+                    },
+                    error: function(error) {
+                        // Обработка ошибки
+                        console.log(error);
+                    }
+                });
+            }
+
+            // Назначение обработчиков событий для кнопок вызова методов
+            $("#getSettingsBtn").click(getSettings);
+            $("#getStateInstanceBtn").click(getStateInstance);
+            $("#sendMessageBtn").click(sendMessage);
+            $("#sendFileByUrlBtn").click(sendFileByUrl);
+        });
+    </script>
+</head>
+<body>
+    <h1>Green API - HTML страница</h1>
+    <label for="idInstance">id инстанса:</label>
+    <input type="text" id="idInstance">
+    <br></br>
+    <label for="apiTokenInstance">API токен инстанса:</label>
+    <input type="text" id="apiTokenInstance">
+    <br></br>
+    <button id="getSettingsBtn">getsetting</button>
+    <button id="getStateInstanceBtn"> getstateinstance</button>
+    
+
+    <button id="sendMessageBtn">sendmessage</button>
+    <button id="sendFileByUrlBtn">sendfilebyurl</button>
+    <br></br>
+    <label for="response">Ответ метода:</label>
+    <textarea id="response" readonly></textarea>
+</body>
+</html>
